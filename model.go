@@ -128,3 +128,9 @@ type Config struct {
 	WeiboId  []WeiboId `json:"weibo_id"`
 	Notifier Notifier  `json:"notifier"`
 }
+
+type SaveWeibo struct {
+	Timestamp int64
+	WeiboId   string
+	Content   string
+}

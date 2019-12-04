@@ -36,7 +36,7 @@ func (c *Client) GetWeiboData(uid string) (error, string, string, string, string
 		if value.Mblog.CreatedAt == "刚刚" {
 			weiboId := value.Mblog.ID
 			content := value.Mblog.Text
-			err = c.PushToWechat(uid, weiboId, userName, content, time.Now().Local())
+			//err = c.PushToWechat(uid, weiboId, userName, content, time.Now().Local())
 			return err, uid, weiboId, userName, content, time.Now().Local()
 		}
 	}
