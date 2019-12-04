@@ -19,6 +19,8 @@ func NewClient(httpClient *http.Client) *Client {
 
 	c := &Client{
 		client: httpClient,
+		userName:make(map[string]string),
+		userContainedId:make(map[string]string),
 	}
 
 	return c

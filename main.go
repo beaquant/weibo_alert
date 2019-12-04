@@ -39,17 +39,14 @@ func main() {
 			},
 		},
 		Action: func(c *cli.Context) error {
-			if c.NArg() > 0 {
-				if strings.Contains(c.String("config"), ".json") {
-					configFile = c.String("config")
-					logger.Info("input config file:%s", configFile)
-				} else {
-					logger.Info("input config file isn't a json file")
-					return errors.New("input config file isn't a json file")
-				}
-				return nil
+			if strings.Contains(c.String("config"), ".json") {
+				configFile = c.String("config")
+				logger.Info("input config file:%s", configFile)
+			} else {
+				logger.Info("input config file isn't a json file")
+				return errors.New("input config file isn't a json file")
 			}
-			return errors.New("input config file!")
+			return nil
 		},
 	}
 
@@ -59,7 +56,12 @@ func main() {
 		return
 	}
 	c := &Config{}
-	json_file.Load(configFile, c)
+	err = json_file.Load(configFile, c)
+	if  err != nil {
+		logger.Fatal(err)
+		return
+	}
+
 	notify := wx.NewWxPush(c.Notifier.Url, c.Notifier.Key)
 
 	client := NewClient(http.DefaultClient)
