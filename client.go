@@ -37,7 +37,7 @@ func (c *Client) SendNewWeiboRequest(u string) ([]byte, error) {
 
 	res, err := c.client.Do(req)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("SendNewWeiboRequest error:", err)
 		return nil, err
 	}
 

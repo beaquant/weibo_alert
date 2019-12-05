@@ -8,6 +8,7 @@ import (
 	"github.com/beaquant/utils/wx"
 	"github.com/urfave/cli/v2"
 	"github.com/wuYin/logx"
+	"math/rand"
 
 	"net/http"
 	"os"
@@ -105,7 +106,7 @@ func main() {
 
 	client := NewClient(http.DefaultClient)
 
-	tick := time.NewTicker(10 * time.Second)
+	tick := time.NewTimer(10 * time.Second)
 	exitSignal := make(chan os.Signal, 1)
 	sigs := []os.Signal{os.Interrupt, syscall.SIGILL, syscall.SIGINT, syscall.SIGKILL, syscall.SIGQUIT, syscall.SIGTERM}
 	signal.Notify(exitSignal, sigs...)
@@ -147,6 +148,8 @@ func main() {
 				weiboSaveFileCsv.Flush()
 
 			}
+
+			tick.Reset(time.Second * 10 + time.Duration(rand.Int31n(5)) * time.Second)
 		}
 	}
 }

@@ -23,13 +23,13 @@ func (c *Client) GetWeiboData(uid string) (error, string, string, string, string
 	u := fmt.Sprintf("https://m.weibo.cn/api/container/getIndex?type=uid&value=%s&containerid=%s", uid, userContainedId)
 	res, err := c.SendNewWeiboRequest(u)
 	if err != nil {
-		panic(err)
+		return err, "", "", "", "", time.Now()
 	}
 
 	var weibo Weibo
 	err = json.Unmarshal(res, &weibo)
 	if err != nil {
-		panic(err)
+		return err, "", "", "", "", time.Now()
 	}
 
 	for _, value := range weibo.Data.Cards {
