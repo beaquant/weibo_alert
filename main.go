@@ -129,7 +129,7 @@ func main() {
 					WeiboId:   weiboId,
 					Content:   content,
 				})
-				logger.Warn(fmt.Sprintf("[%s]发表了微博 https://m.weibo.cn/detail/%s", userName, weiboId))
+				logger.Warn(fmt.Sprintf("[%s]发表了微博: %s\n详情: https://m.weibo.cn/detail/%s", userName, content, weiboId))
 				text := fmt.Sprintf("[%s]发表了微博", userName)
 				desp := fmt.Sprintf(`链接: https://m.weibo.cn/detail/%s
 
